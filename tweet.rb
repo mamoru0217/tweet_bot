@@ -48,14 +48,13 @@ class Tweet
             config.oauth_token_secret = 'JEen7vLJu2O8qOr5mr9vYO5HzrlfK6FEhq7ebyyJw'
         end
 
-        
+    end
         tweets = Twitter.mentions({:count => 1})
             tweets.each do |t|
             name = "#{t.user.screen_name}"
-            tweet = @text[rand(@text.length)]
-            Twitter.update("@" + name + tweet)
+            
+            Twitter.update("@" + name + "どう!")
         end
-    end
     
     def random_tweet
         tweet = @text[rand(@text.length)]
