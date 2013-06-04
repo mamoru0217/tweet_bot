@@ -49,7 +49,15 @@ class Tweet
         end
 
     end
-    
+
+    def reply
+        tweets = Twitter.mentions({:count => 1})
+        tweets.each do |t|
+        name = "#{t.user.screen_name}"
+        update("@" + name + "ありがとうございます!")
+        end
+    end
+
     def random_tweet
         tweet = @text[rand(@text.length)]
         update(tweet)
