@@ -1,5 +1,5 @@
 require './tweet.rb'
 
 task :cron do
-  Tweet.new.daily_tweet
+  Tweet.new.random_tweet
 end
