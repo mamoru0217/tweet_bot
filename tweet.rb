@@ -49,12 +49,6 @@ class Tweet
         end
 
     end
-        tweets = Twitter.mentions({:count => 1})
-            tweets.each do |t|
-            name = "#{t.user.screen_name}"
-            
-            Twitter.update("@" + name + "どう!")
-        end
     
     def random_tweet
         tweet = @text[rand(@text.length)]
