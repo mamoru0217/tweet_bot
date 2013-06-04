@@ -3,11 +3,12 @@
 require 'rubygems'
 require 'twitter'
 
+
 class Tweet
     
     def initialize
         @text = @text = <<-EOF.split("\n")
-            今日は卵かけごはんが食べたい。
+            今日は卵かけごはんが食べたいな。
             今日は鯖の味噌煮が食べたい。
             今日はビビンバが食べたい。
             今日は天ぷらそばが食べたい。
@@ -45,6 +46,14 @@ class Tweet
             config.consumer_secret    = 'Wus1XPNxCXymUcDqzVoGOYqaTRZAxT4UXlzOTI3j8'
             config.oauth_token        = '1472870293-rAmWJ8hQXFbeBhZoh4HXh6kY3s1E20jHYPQx9fi'
             config.oauth_token_secret = 'JEen7vLJu2O8qOr5mr9vYO5HzrlfK6FEhq7ebyyJw'
+        end
+
+        
+        tweets = Twitter.mentions({:count => 1})
+            tweets.each do |t|
+            name = "#{t.user.screen_name}"
+            tweet = @text[rand(@text.length)]
+            Twitter.update("@" + name + tweet)
         end
     end
     
