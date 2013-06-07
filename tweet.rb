@@ -14,7 +14,7 @@ tweets = Twitter.mentions({:count => 1})
 
 tweets.each do |t|
     name = "#{t.user.screen_name}"
-    Twitter.update("@" + name + "今日のおすすめは鯖の味噌煮です。" )
+    Twitter.update("@" + name + "今日のおすすめは鯖の味噌です。" )
 end
 
 class Tweet
