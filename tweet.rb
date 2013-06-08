@@ -1,25 +1,14 @@
 # -*- encoding: utf-8 -*-
-
 require 'rubygems'
 require 'twitter'
-
-Twitter.configure do |config|
-            config.consumer_key       = 'Y10UPf0Kx86dWav73nW9g'
-            config.consumer_secret    = 'Wus1XPNxCXymUcDqzVoGOYqaTRZAxT4UXlzOTI3j8'
-            config.oauth_token        = '1472870293-rAmWJ8hQXFbeBhZoh4HXh6kY3s1E20jHYPQx9fi'
-            config.oauth_token_secret = 'JEen7vLJu2O8qOr5mr9vYO5HzrlfK6FEhq7ebyyJw'
-        end
-
-tweets = Twitter.mentions({:count => 1})
-
-tweets.each do |t|
-    name = "#{t.user.screen_name}"
-    Twitter.update("@" + name + "今日のおすすめは鯖の味噌です。" )
-end
+require'./db.rb'
 
 class Tweet
     
     def initialize
+
+        arigato = "ありがとうございます"
+
         @text = @text = <<-EOF.split("\n")
             今日は卵かけごはんが食べたいな。
             今日は鯖の味噌煮が食べたい。
@@ -53,7 +42,7 @@ class Tweet
             今日はナスが食べたい。
             今日はなにが食べたい？
             EOF
-        
+
         Twitter.configure do |config|
             config.consumer_key       = 'Y10UPf0Kx86dWav73nW9g'
             config.consumer_secret    = 'Wus1XPNxCXymUcDqzVoGOYqaTRZAxT4UXlzOTI3j8'
@@ -61,6 +50,7 @@ class Tweet
             config.oauth_token_secret = 'JEen7vLJu2O8qOr5mr9vYO5HzrlfK6FEhq7ebyyJw'
         end
 
+        @already_tweets = TabetaiDB::AlreadyReply.new
     end
 
     def random_tweet
@@ -68,9 +58,13 @@ class Tweet
         update(tweet)
     end
     
-    def daily_tweet
-        tweet = @text[Time.now.day - 1]
-        update(tweet)
+    def reply
+        mentions = Twitter.mentions
+        mentions.each do |mention|
+            next unless @already_tweets.find_by_tweet( mention.id ).nil?
+            Twitter.update("@#{mention.user.screen_name} 働かざるもの食うべからず。")
+            @already_tweets.create_tweet( mention.id ) 
+        end
     end
     
     private
@@ -83,5 +77,5 @@ class Tweet
             nil # todo
         end
     end
-    
+
 end

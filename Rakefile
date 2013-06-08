@@ -1,5 +1,10 @@
 require './tweet.rb'
 
-task :cron do
-  Tweet.new.random_tweet
+task :reply do
+	Tweet.new.reply
 end
+
+task :cron do
+	Tweet.new.random_tweet
+end
+
