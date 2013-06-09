@@ -1,5 +1,0 @@
-Consumer Key: Y10UPf0Kx86dWav73nW9g
-Consumer Secret: Wus1XPNxCXymUcDqzVoGOYqaTRZAxT4UXlzOTI3j8
-PIN: 8269953
-Token: 1472870293-rAmWJ8hQXFbeBhZoh4HXh6kY3s1E20jHYPQx9fi
-Secret: JEen7vLJu2O8qOr5mr9vYO5HzrlfK6FEhq7ebyyJw
