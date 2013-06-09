@@ -60,10 +60,10 @@ class Tweet
             EOF
         
         Twitter.configure do |config| 
-            config.consumer_key       = 'Y10UPf0Kx86dWav73nW9g'
-            config.consumer_secret    = 'Wus1XPNxCXymUcDqzVoGOYqaTRZAxT4UXlzOTI3j8'
-            config.oauth_token        = '1472870293-rAmWJ8hQXFbeBhZoh4HXh6kY3s1E20jHYPQx9fi'
-            config.oauth_token_secret = 'JEen7vLJu2O8qOr5mr9vYO5HzrlfK6FEhq7ebyyJw'
+            config.consumer_key       = ' '
+            config.consumer_secret    = ' '
+            config.oauth_token        = ' '
+            config.oauth_token_secret = ' '
         end
 
         @already_tweets = TabetaiDB::AlreadyReply.new #データベースと接続する（？）
