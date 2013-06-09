@@ -1,15 +1,15 @@
 tabetai_bot @mamorunomamoru1
 =========
 
-*_機能_
-1.定期的につぶやく
-2.メンションを貰ったらリプライを返す。（すでにツイートした宛にはツイートしないようになっています）
+*機能
+*1.定期的につぶやく
+*2.メンションを貰ったらリプライを返す。（すでにツイートした宛にはツイートしないようになっています）
 
 *言語 : Ruby2.0
 *サーバー : heroku
 *データベース : MongoHQ (herokuのアドオン)
 
-_参考にした記事_
+参考にした記事
 
 1.「Herokuを使って1日1回名言をツイートするTwitter Botの作り方」 - http://blog.ruedap.com/entry/20110209/ruby_heroku_twitter_bot  
 ※Herokuを利用して、Twitter Botを作成する手順が書いてあるページ。ただ、cron（定期的にプログラムを実行するためのごにょごにょ）についての記述は古い。  
@@ -20,7 +20,7 @@ _参考にした記事_
 4.「プログラミング未経験者でもできる、 Ruby を使った Twitter の bot の作り方（第二章）」 - http://d.hatena.ne.jp/syo00/20100606/1275840369  
 5.「Twitterでフォロー返し・お礼メンションを送るRubyスクリプト」http://d.hatena.ne.jp/poti0/20120425/1335363064  
 
-_そして、各種ドキュメント_
+そして、各種ドキュメント
 
 1.The Twitter Ruby Gem - http://rdoc.info/gems/twitter  
 2.Ruby 2.0 - http://www.ruby-doc.org/core-2.0/  
