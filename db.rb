@@ -7,7 +7,7 @@ require 'twitter'
 
 module TabetaiDB
   class Base
-    MONGOHQ_URL="booktower://booktower:ozisonns@linus.mongohq.com:10092/app16097590"
+    MONGOHQ_URL="collection名://ユーザー名:パスワード@linus.mongohq.com:10092/app16097590"
     def self.get_connection
       return @db if @db
       db      = URI.parse(MONGOHQ_URL)
