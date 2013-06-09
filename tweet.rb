@@ -7,9 +7,7 @@ class Tweet
     
     def initialize
 
-        arigato = "ありがとうございます"
-
-        @text = @text = <<-EOF.split("\n")
+        @text = @text = <<-EOF.split("\n") #定期的につぶやくツイートの内容
             今日は卵かけごはんが食べたいな。
             今日は鯖の味噌煮が食べたい。
             今日はビビンバが食べたい。
@@ -43,32 +41,51 @@ class Tweet
             今日はなにが食べたい？
             EOF
 
-        Twitter.configure do |config|
+        @reply = @reply = <<-EOF.split("\n") #リプライに使う内容
+            今日のおすすめは焼きなすです！
+            今日のおすすめはホワイトシチューです！
+            今日のおすすめはブリの照焼です！
+            今日のおすすめはチキンカレーです！
+            今日のおすすめは鯛のカルパッチョです！
+            今日のおすすめはいなりずしです！
+            今日のおすすめはチョコレートケーキです！
+            今日はペッパーハウスに行きましょう！
+            今日はマクドナルドに行きましょう！
+            今日は断食してみましょう！
+            こんにちは！ハハッ！
+            こんばんは！今あなたの後ろにいます！
+            こんばんは！
+            今日のおすすめはとんこつラーメンです！
+            今日のおすすめは鶏の唐揚げです！
+            EOF
+        
+        Twitter.configure do |config| 
             config.consumer_key       = 'Y10UPf0Kx86dWav73nW9g'
             config.consumer_secret    = 'Wus1XPNxCXymUcDqzVoGOYqaTRZAxT4UXlzOTI3j8'
             config.oauth_token        = '1472870293-rAmWJ8hQXFbeBhZoh4HXh6kY3s1E20jHYPQx9fi'
             config.oauth_token_secret = 'JEen7vLJu2O8qOr5mr9vYO5HzrlfK6FEhq7ebyyJw'
         end
 
-        @already_tweets = TabetaiDB::AlreadyReply.new
+        @already_tweets = TabetaiDB::AlreadyReply.new #データベースと接続する（？）
     end
 
     def random_tweet
-        tweet = @text[rand(@text.length)]
-        update(tweet)
+        tweet = @text[rand(@text.length)] # @textの中からランダムに一文選ぶ
+        update(tweet) # 選んだ文をツイート
     end
     
     def reply
-        mentions = Twitter.mentions
-        mentions.each do |mention|
-            next unless @already_tweets.find_by_tweet( mention.id ).nil?
-            Twitter.update("@#{mention.user.screen_name} 働かざるもの食うべからず。")
-            @already_tweets.create_tweet( mention.id ) 
+        tweet = @reply[rand(@reply.length)]
+        mentions = Twitter.mentions #自分へのメンションのタイムラインを取得
+        mentions.each do |mention| # eachメソッドによる繰り返し処理
+            next unless @already_tweets.find_by_tweet( mention.id ).nil? # データベースの中の"mension_id"を検索する
+            Twitter.update("@#{mention.user.screen_name}"+tweet) # 新しい mention_id であれば、そこ宛にツイート
+            @already_tweets.create_tweet( mention.id ) # ツイートした先の mention_id をデータベースに格納。
         end
     end
     
     private
-    def update(tweet)
+    def update(tweet) # random_tweetの"update(tweet)"の定義
         return nil unless tweet
         
         begin
